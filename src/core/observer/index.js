@@ -40,9 +40,9 @@ let defineReactive = (obj, key, value) => {
             if (newVal === value) {
                 return
             }
-            newVal = value
+            value = newVal
             // 当设置的属性是个对象，也要继续observe
-            // observe(newVal)
+            observe(newVal)
         },
         get() {
            return value
