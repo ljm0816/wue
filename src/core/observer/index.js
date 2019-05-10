@@ -1,9 +1,10 @@
-function observe(value) {
+import Dep from './dep'
+/*function observe(value) {
     if (!value || typeof value !== 'object') {
         return
     }
     return new Observer(value)
-}
+}*/
 /***
  * 实现observer数据劫持
  */
@@ -35,6 +36,8 @@ class Observer{
  * @param value
  */
 let defineReactive = (obj, key, value) => {
+    debugger
+    let dep = new Dep() // 创建订阅器（找到房产中介）
     Object.defineProperty(obj, key, {
         set(newVal) {
             if (newVal === value) {
@@ -42,14 +45,27 @@ let defineReactive = (obj, key, value) => {
             }
             value = newVal
             // 当设置的属性是个对象，也要继续observe
-            observe(newVal)
+            //observe(newVal)
+            dep.notify() // 订阅器通知给订阅者（当房产更新时，房产中介通知买房子的人）
         },
         get() {
+            // 如果建立了关联，那么开始添加联系方式
+            if (Dep.target) {
+                dep.addDepend()
+            }
            return value
         }
     })
 }
 
+export default function observer(value) {
+    if (!value || typeof value !== 'object') {
+        return
+    }
+    return new Observer(value)
+}
+
+/*
 let data = {
     msg: 'hello wue',
     deep: {
@@ -57,4 +73,4 @@ let data = {
         b: 2
     }
 }
-observe(data)
+observe(data)*/
