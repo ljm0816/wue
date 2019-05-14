@@ -1,10 +1,4 @@
 import Dep from './dep'
-/*function observe(value) {
-    if (!value || typeof value !== 'object') {
-        return
-    }
-    return new Observer(value)
-}*/
 /***
  * 实现observer数据劫持
  */
@@ -36,7 +30,6 @@ class Observer{
  * @param value
  */
 let defineReactive = (obj, key, value) => {
-    debugger
     let dep = new Dep() // 创建订阅器（找到房产中介）
     Object.defineProperty(obj, key, {
         set(newVal) {

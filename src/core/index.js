@@ -14,6 +14,6 @@ export default class Wue {
         for (let key in vm._data) {
             proxy(vm, '_data', key)
         }
-        /*new Compiler(vm.$options.el, vm)*/
+        new Compiler(vm.$options.el, vm)
     }
 }
